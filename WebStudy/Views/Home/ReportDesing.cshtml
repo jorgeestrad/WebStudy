@@ -1,0 +1,39 @@
+﻿<link href="~/node_modules/jquery-ui-dist/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/node_modules/jquery/dist/jquery.js"></script>
+<script src="~/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+
+<script src="~/node_modules/knockout/build/output/knockout-latest.js"></script>
+
+<script src="~/node_modules/cldrjs/dist/cldr.js"></script>
+<script src="~/node_modules/cldrjs/dist/cldr/event.js"></script>
+<script src="~/node_modules/cldrjs/dist/cldr/supplemental.js"></script>
+<script src="~/node_modules/cldrjs/dist/cldr/unresolved.js"></script>
+
+<script src="~/node_modules/globalize/dist/globalize.js"></script>
+<script src="~/node_modules/globalize/dist/globalize/currency.js"></script>
+<script src="~/node_modules/globalize/dist/globalize/message.js"></script>
+<script src="~/node_modules/globalize/dist/globalize/number.js"></script>
+<script src="~/node_modules/globalize/dist/globalize/date.js"></script>
+
+<script src="~/node_modules/devextreme/dist/js/dx.all.js"></script>
+<link href="~/node_modules/devextreme/dist/css/dx.common.css" rel="stylesheet" />
+<link href="~/node_modules/devextreme/dist/css/dx.light.css" rel="stylesheet" />
+
+<!-- Optionally (for intelligent code completion in the Expression Editor and Filter Editor) -->
+<script src="~/node_modules/ace-builds/src/ace.js"></script>
+<script src="~/node_modules/ace-builds/src/ext-language_tools.js"></script>
+<script src="~/node_modules/ace-builds/src/snippets/text.js"></script>
+<!--  -->
+<!-- If your application contains the Report Designer or both the Report Designer and Document Viewer -->
+<script src="~/node_modules/@@devexpress/analytics-core/dist/js/dx-analytics-core.js"></script>
+<script src="~/node_modules/@@devexpress/analytics-core/dist/js/dx-querybuilder.js"></script>
+<script src="~/node_modules/devexpress-reporting/dist/js/dx-webdocumentviewer.js"></script>
+<script src="~/node_modules/devexpress-reporting/dist/js/dx-reportdesigner.js"></script>
+<link href="~/node_modules/@@devexpress/analytics-core/dist/css/dx-analytics.common.css" rel="stylesheet" />
+<link href="~/node_modules/@@devexpress/analytics-core/dist/css/dx-analytics.light.css" rel="stylesheet" />
+<link href="~/node_modules/@@devexpress/analytics-core/dist/css/dx-querybuilder.css" rel="stylesheet" />
+<link href="~/node_modules/devexpress-reporting/dist/css/dx-webdocumentviewer.css" rel="stylesheet" />
+<link href="~/node_modules/devexpress-reporting/dist/css/dx-reportdesigner.css" rel="stylesheet" />
+<h5>Reporte</h5>
+@Html.DevExpress().ReportDesigner("ReportDesigner").Height("1000px").Name("rptE");

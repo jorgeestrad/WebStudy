@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="New Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="Masters_Cities" ComponentName="sqlDataSource1">
+      <Connection Name="WebStydy" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="Masters_Cities">
+        <Tables>
+          <Table Name="Masters.Cities" />
+        </Tables>
+        <Columns>
+          <Column Table="Masters.Cities" Name="Id" />
+          <Column Table="Masters.Cities" Name="CountryId" />
+          <Column Table="Masters.Cities" Name="Name" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="sqlDataSource1" DataMember="Masters_Cities">
+      <DataItems>
+        <Measure DataMember="Name" SummaryType="Count" DefaultId="DataItem0" />
+        <Dimension DataMember="Name" DefaultId="DataItem1" />
+      </DataItems>
+      <GridColumns>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem0" />
+        </GridMeasureColumn>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem1" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
