@@ -1,12 +1,9 @@
 ﻿namespace WebStudy
 {
-    using Data;
-    using Data.Entities;
     using DevExpress.AspNetCore;
     using DevExpress.AspNetCore.Reporting;
     using DevExpress.DashboardAspNetCore;
     using DevExpress.DashboardWeb;
-    using DevExpress.DataAccess;
     using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -24,29 +21,19 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Text;
+    using WebStudy.Data;
+    using WebStudy.Data.Entities;
     using WebStudy.Data.Repositories;
     using WebStudy.Services;
-   
+
 
     public class Startup
     {
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment hostingEnvironment)
-        {
-            Configuration = configuration;
-            this.hostingEnvironment = hostingEnvironment;
-            FileProvider = hostingEnvironment.ContentRootFileProvider;
-            loggerFactory.AddFile(Configuration.GetSection("Logging"));
-
-        }
-
-        public IConfiguration Configuration { get; }
-
         public IFileProvider FileProvider { get; }
-
+        public IConfiguration Configuration { get; }
 
         public IConfigurationSection GetConnectionStrings()
         {
@@ -63,12 +50,19 @@
               .GetSection("ConnectionStrings");
         }
 
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory, IHostingEnvironment hostingEnvironment)
+        {
+            Configuration = configuration;
+            this.hostingEnvironment = hostingEnvironment;
+            FileProvider = hostingEnvironment.ContentRootFileProvider;
+            loggerFactory.AddFile(Configuration.GetSection("Logging"));
+
+        }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-       
-            //services.AddControllersWithViews();
 
             services.AddDevExpressControls();
 
@@ -92,10 +86,10 @@
                 });
             });
 
-            // Add the third-party (JQuery, Knockout, etc.) and DevExtreme libraries.
+
             services.AddDevExpressControls(settings => settings.Resources = ResourcesType.ThirdParty | ResourcesType.DevExtreme);
 
-
+        
             #region Localization
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -138,8 +132,8 @@
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequiredLength = 6;
             })
-          .AddDefaultTokenProviders()
-          .AddEntityFrameworkStores<DataContext>();
+                      .AddDefaultTokenProviders()
+                      .AddEntityFrameworkStores<DataContext>();
 
 
             services.AddAuthentication()
@@ -160,7 +154,6 @@
                 cfg.UseNpgsql(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-
             services.AddTransient<SeedDb>();
 
             services.AddScoped<IMailHelper, MailHelper>();
@@ -171,10 +164,8 @@
 
             services.AddScoped<ICountryRepository, CountryRepository>();
 
-
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -184,7 +175,6 @@
                 options.LoginPath = "/Account/NotAuthorized";
                 options.AccessDeniedPath = "/Account/NotAuthorized";
             });
-
 
         }
 
@@ -196,7 +186,7 @@
 
             app.UseDevExpressControls();
 
-          
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
@@ -206,7 +196,7 @@
 
             DevExpress.XtraReports.Web.Extensions.ReportStorageWebExtension.RegisterExtensionGlobal(new ReportStorage());
 
-         
+
             #region Localization
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
